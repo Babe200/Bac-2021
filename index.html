@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نتائج الباك</title>
+  <style>
+    body {
+      font-family: 'Helvetica World', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h1 {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1rem 0;
+      margin: 0 0 1rem;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 300px;
+      max-width: 90%;
+    }
+    .result {
+      background-color: white;
+      margin: 0 auto 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 600px;
+      text-align: right;
+    }
+    .not-found {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>البحث عن نتيجة الباكالوريا 2021</h1>
+  <input type="text" id="searchInput" placeholder="أدخل رقم الجلوس" oninput="searchResult()" />
+  <div id="resultContainer"></div>
+
+  <script>
+    let allResults = [];
+    let loadedParts = 0;
+
+    // تحميل الجزئين من النتائج
+    function loadResults() {
+      fetch("all_results_part1.json")
+        .then(response => response.json())
+        .then(data => {
+          allResults = allResults.concat(data);
+          loadedParts++;
+          if (loadedParts === 2) searchResult(); // ابدأ البحث إذا كان هناك قيمة مدخلة
+        });
+
+      fetch("all_results_part2.json")
+        .then(response => response.json())
+        .then(data => {
+          allResults = allResults.concat(data);
+          loadedParts++;
+          if (loadedParts === 2) searchResult(); // ابدأ البحث إذا كان هناك قيمة مدخلة
+        });
+    }
+
+    function searchResult() {
+      const input = document.getElementById("searchInput").value.trim();
+      const container = document.getElementById("resultContainer");
+      container.innerHTML = "";
+
+      if (!input) return;
+
+      const match = allResults.find(
+        student => student["Numéro Bac"]?.toString() === input
+      );
+
+      if (match) {
+        container.innerHTML = `
+          <div class="result">
+            <p><strong>الاسم:</strong> ${match["Nom Arabe"] || ""}</p>
+            <p><strong>رقم الجلوس:</strong> ${match["Numéro Bac"] || ""}</p>
+            <p><strong>المعدل:</strong> ${match["MoyBac"] || ""}</p>
+            <p><strong>القرار:</strong> ${match["Decision"] || ""}</p>
+            <p><strong>المركز:</strong> ${match["Centre"] || ""}</p>
+            <p><strong>المدرسة:</strong> ${match["Ecole"] || ""}</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = '<p class="not-found">النتيجة غير موجودة</p>';
+      }
+    }
+
+    // تحميل النتائج عند بدء الصفحة
+    loadResults();
+  </script>
+</body>
+</html>
