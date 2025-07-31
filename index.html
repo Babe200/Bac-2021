@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج البكالوريا 2021 - جميع الولايات</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            height: 45px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 0 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .search-box button:hover {
+            background-color: #2980b9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .filters {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .filters h2 {
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .filter-item select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 1rem;
+        }
+        
+        .top-results {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, var(--secondary), #1abc9c);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .medal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
+            color: white;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: var(--light);
+        }
+        
+        th {
+            padding: 12px 15px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 2px solid #ddd;
+            cursor: pointer;
+        }
+        
+        th:hover {
+            background-color: #e0e0e0;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tbody tr {
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
+        
+        .success {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .failed {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem;
+            gap: 10px;
+        }
+        
+        .pagination button {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination button:hover {
+            background-color: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        .pagination button.active {
+            background-color: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        .student-details {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .student-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .info-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: var(--dark);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+            
+            .stats {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>نتائج البكالوريا 2021 - جميع الولايات</h1>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="ابحث برقم الجلوس...">
+                    <button onclick="searchStudent()">بحث</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <h2>تصفية النتائج</h2>
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label for="state">الولاية</label>
+                    <select id="state" onchange="filterResults()">
+                        <option value="all">جميع الولايات</option>
+                        <option value="النعمة">ولاية النعمة</option>
+                        <option value="نواكشوط">ولاية نواكشوط</option>
+                        <option value="الحوض الشرقي">ولاية الحوض الشرقي</option>
+                        <option value="لعصابة">ولاية لعصابة</option>
+                        <option value="لبراكنة">ولاية لبراكنة</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="district">المقاطعة</label>
+                    <select id="district" onchange="filterResults()">
+                        <option value="all">جميع المقاطعات</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="school">المدرسة</label>
+                    <select id="school" onchange="filterResults()">
+                        <option value="all">جميع المدارس</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="result">النتيجة</label>
+                    <select id="result" onchange="filterResults()">
+                        <option value="all">جميع النتائج</option>
+                        <option value="ناجح">ناجح</option>
+                        <option value="راسب">راسب</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="total-students">0</div>
+                <div class="stat-label">إجمالي الطلاب</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="passed-students">0</div>
+                <div class="stat-label">الطلاب الناجحين</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="pass-rate">0%</div>
+                <div class="stat-label">نسبة النجاح</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="top-average">0.00</div>
+                <div class="stat-label">أعلى معدل</div>
+            </div>
+        </div>
+
+        <div class="top-results">
+            <div class="section-header">
+                <h2>نتائج الطلاب <span id="results-count"></span></h2>
+            </div>
+            <div class="table-container">
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">الترتيب</th>
+                            <th onclick="sortTable(1)">رقم الجلوس</th>
+                            <th onclick="sortTable(2)">الاسم</th>
+                            <th onclick="sortTable(3)">الولاية</th>
+                            <th onclick="sortTable(4)">المدرسة</th>
+                            <th onclick="sortTable(5)">المعدل</th>
+                            <th onclick="sortTable(6)">القرار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                        <!-- سيتم ملؤه بواسطة JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination" id="pagination">
+                <!-- سيتم ملؤه بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <div class="student-details" id="student-details" style="display:none;">
+            <div class="student-header">
+                <h2>تفاصيل الطالب</h2>
+                <button onclick="closeDetails()">إغلاق</button>
+            </div>
+            <div class="student-info">
+                <div class="info-card">
+                    <h3>المعلومات الشخصية</h3>
+                    <div class="info-item">
+                        <span class="info-label">رقم الجلوس:</span>
+                        <span id="seat-number">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">الاسم:</span>
+                        <span id="student-name">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">مكان الولادة:</span>
+                        <span id="birth-place">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">تاريخ الولادة:</span>
+                        <span id="birth-date">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">الولاية:</span>
+                        <span id="student-state">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">المقاطعة:</span>
+                        <span id="student-district">-</span>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3>المعلومات الأكاديمية</h3>
+                    <div class="info-item">
+                        <span class="info-label">المدرسة:</span>
+                        <span id="school-name">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">المركز:</span>
+                        <span id="center-name">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">المعدل:</span>
+                        <span id="average">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">القرار:</span>
+                        <span id="decision">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">الشعبة:</span>
+                        <span id="specialization">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © نتائج البكالوريا 2021 - جميع الولايات</p>
+        <p>آخر تحديث: 15 أغسطس 2023</p>
+    </footer>
+
+    <script>
+        // بيانات التلاميذ (تمثل ملفات JSON)
+        const studentsData = [
+            {
+                seat_number: "00165",
+                name: "مولاي عبد الله مولاي اسماعيل مولاي الحسن",
+                state: "النعمة",
+                district: "النعمة",
+                school: "ثانوية النعمة",
+                center: "المركز الرئيسي (النعمة 1)",
+                average: 10.91,
+                decision: "ناجح",
+                birth_place: "النعمة",
+                birth_date: "2001-12-30",
+                specialization: "علوم تجريبية"
+            },
+            {
+                seat_number: "00103",
+                name: "فاطم حمادي بديت",
+                state: "النعمة",
+                district: "باسكنو",
+                school: "ثانوية باسكنو",
+                center: "ثانوية باسكنو",
+                average: 10.00,
+                decision: "ناجح",
+                birth_place: "باسكنو",
+                birth_date: "2002-03-15",
+                specialization: "آداب"
+            },
+            {
+                seat_number: "00031",
+                name: "اسماعيل محمد افشال",
+                state: "النعمة",
+                district: "النعمة",
+                school: "ثانوية النعمة",
+                center: "المركز الرئيسي (النعمة 1)",
+                average: 10.00,
+                decision: "ناجح",
+                birth_place: "النعمة",
+                birth_date: "2001-11-22",
+                specialization: "علوم رياضية"
+            },
+            {
+                seat_number: "00457",
+                name: "عيني فيه الشيخ سيدي",
+                state: "النعمة",
+                district: "تمبدغة",
+                school: "ثانوية تمبدغة",
+                center: "ثانوية تمبدغة",
+                average: 12.09,
+                decision: "ناجح",
+                birth_place: "تمبدغة",
+                birth_date: "2002-01-10",
+                specialization: "علوم تجريبية"
+            },
+            {
+                seat_number: "00492",
+                name: "ازانه فال مولاي الحسن",
+                state: "النعمة",
+                district: "تمبدغة",
+                school: "ثانوية تمبدغة",
+                center: "ثانوية تمبدغة",
+                average: 8.19,
+                decision: "ناجح",
+                birth_place: "تمبدغة",
+                birth_date: "2001-09-05",
+                specialization: "آداب"
+            },
+            {
+                seat_number: "00007",
+                name: "بنت لعبيد محمد حبيب الله حبيب الله",
+                state: "النعمة",
+                district: "النعمة",
+                school: "ثانوية النعمة",
+                center: "المركز الرئيسي (النعمة 1)",
+                average: 8.83,
+                decision: "ناجح",
+                birth_place: "النعمة",
+                birth_date: "2002-02-18",
+                specialization: "علوم رياضية"
+            },
+            {
+                seat_number: "00459",
+                name: "فاطمة محمد المختار امبارك",
+                state: "النعمة",
+                district: "تمبدغة",
+                school: "ثانوية تمبدغة",
+                center: "ثانوية تمبدغة",
+                average: 9.52,
+                decision: "ناجح",
+                birth_place: "تمبدغة",
+                birth_date: "2001-07-30",
+                specialization: "علوم تجريبية"
+            },
+            {
+                seat_number: "00152",
+                name: "مريم ديد سيدي عبد الله",
+                state: "النعمة",
+                district: "باسكنو",
+                school: "ثانوية باسكنو",
+                center: "ثانوية باسكنو",
+                average: 8.40,
+                decision: "ناجح",
+                birth_place: "باسكنو",
+                birth_date: "2002-04-25",
+                specialization: "آداب"
+            },
+            {
+                seat_number: "00370",
+                name: "محمد محمود سيدينا مولاي الحسن",
+                state: "النعمة",
+                district: "باسكنو",
+                school: "ثانوية باسكنو",
+                center: "ثانوية باسكنو",
+                average: 8.15,
+                decision: "ناجح",
+                birth_place: "باسكنو",
+                birth_date: "2001-08-12",
+                specialization: "علوم رياضية"
+            },
+            {
+                seat_number: "00004",
+                name: "لاله الديه فارجو",
+                state: "النعمة",
+                district: "النعمة",
+                school: "ثانوية النعمة",
+                center: "المركز الرئيسي (النعمة 1)",
+                average: 8.21,
+                decision: "ناجح",
+                birth_place: "النعمة",
+                birth_date: "2002-05-20",
+                specialization: "آداب"
+            },
+            {
+                seat_number: "00543",
+                name: "أحمد محمد الأمين",
+                state: "نواكشوط",
+                district: "تفرغ زينة",
+                school: "ثانوية تفرغ زينة",
+                center: "ثانوية تفرغ زينة",
+                average: 11.25,
+                decision: "ناجح",
+                birth_place: "نواكشوط",
+                birth_date: "2001-10-08",
+                specialization: "علوم تجريبية"
+            },
+            {
+                seat_number: "00678",
+                name: "خديجة عبد الله",
+                state: "الحوض الشرقي",
+                district: "النعمة",
+                school: "ثانوية النعمة",
+                center: "المركز الرئيسي (النعمة 1)",
+                average: 9.75,
+                decision: "ناجح",
+                birth_place: "النعمة",
+                birth_date: "2002-01-30",
+                specialization: "آداب"
+            },
+            {
+                seat_number: "00712",
+                name: "سيدي محمد ولد الشيخ",
+                state: "لعصابة",
+                district: "كيفة",
+                school: "ثانوية كيفة",
+                center: "ثانوية كيفة",
+                average: 7.85,
+                decision: "راسب",
+                birth_place: "كيفة",
+                birth_date: "2001-12-15",
+                specialization: "علوم رياضية"
+            },
+            {
+                seat_number: "00845",
+                name: "أم الخير أحمدو",
+                state: "لبراكنة",
+                district: "ألاك",
+                school: "ثانوية ألاك",
+                center: "ثانوية ألاك",
+                average: 10.45,
+                decision: "ناجح",
+                birth_place: "ألاك",
+                birth_date: "2001-09-22",
+                specialization: "علوم تجريبية"
+            },
+            {
+                seat_number: "00932",
+                name: "عبد الرحمن سيدي محمد",
+                state: "النعمة",
+                district: "ولاته",
+                school: "ثانوية ولاته",
+                center: "ثانوية ولاته",
+                average: 6.90,
+                decision: "راسب",
+                birth_place: "ولاته",
+                birth_date: "2002-03-05",
+                specialization: "علوم رياضية"
+            },
+            {
+                seat_number: "01056",
+                name: "فاطمة منت أحمد",
+                state: "نواكشوط",
+                district: "لكصر",
+                school: "ثانوية لكصر",
+                center: "ثانوية لكصر",
+                average: 11.80,
+                decision: "ناجح",
+                birth_place: "نواكشوط",
+                birth_date: "2001-11-18",
+                specialization: "آداب"
+            }
+        ];
+
+        // متغيرات عالمية
+        let currentPage = 1;
+        const resultsPerPage = 10;
+        let filteredStudents = [];
+        let sortedColumn = null;
+        let sortDirection = 1; // 1 تصاعدي, -1 تنازلي
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعبئة خيارات التصفية
+            populateFilters();
+            
+            // تعبئة الجدول بالنتائج
+            filterResults();
+            
+            // حساب وعرض الإحصائيات
+            updateStatistics();
+        });
+
+        // تعبئة خيارات التصفية
+        function populateFilters() {
+            const stateSelect = document.getElementById('state');
+            const districtSelect = document.getElementById('district');
+            const schoolSelect = document.getElementById('school');
+            
+            // جمع القيم الفريدة
+            const states = [...new Set(studentsData.map(s => s.state))];
+            const districts = [...new Set(studentsData.map(s => s.district))];
+            const schools = [...new Set(studentsData.map(s => s.school))];
+            
+            // تعبئة المقاطعات
+            districts.forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+            
+            // تعبئة المدارس
+            schools.forEach(school => {
+                const option = document.createElement('option');
+                option.value = school;
+                option.textContent = school;
+                schoolSelect.appendChild(option);
+            });
+        }
+
+        // تصفية النتائج
+        function filterResults() {
+            const state = document.getElementById('state').value;
+            const district = document.getElementById('district').value;
+            const school = document.getElementById('school').value;
+            const result = document.getElementById('result').value;
+            
+            // تطبيق التصفية
+            filteredStudents = studentsData.filter(student => {
+                return (state === 'all' || student.state === state) &&
+                       (district === 'all' || student.district === district) &&
+                       (school === 'all' || student.school === school) &&
+                       (result === 'all' || student.decision === result);
+            });
+            
+            // ترتيب النتائج
+            if (sortedColumn !== null) {
+                sortTable(sortedColumn);
+            } else {
+                // الترتيب الافتراضي حسب المعدل تنازلياً
+                filteredStudents.sort((a, b) => b.average - a.average);
+            }
+            
+            // تحديث الإحصائيات
+            updateStatistics();
+            
+            // إعادة تعيين الصفحة الحالية
+            currentPage = 1;
+            
+            // عرض النتائج
+            displayResults();
+            
+            // إنشاء أزرار التصفح
+            setupPagination();
+        }
+
+        // تحديث الإحصائيات
+        function updateStatistics() {
+            const totalStudents = filteredStudents.length;
+            const passedStudents = filteredStudents.filter(s => s.decision === 'ناجح').length;
+            const passRate = totalStudents > 0 ? Math.round((passedStudents / totalStudents) * 100) : 0;
+            const topAverage = totalStudents > 0 ? Math.max(...filteredStudents.map(s => s.average)).toFixed(2) : 0;
+            
+            document.getElementById('total-students').textContent = totalStudents;
+            document.getElementById('passed-students').textContent = passedStudents;
+            document.getElementById('pass-rate').textContent = `${passRate}%`;
+            document.getElementById('top-average').textContent = topAverage;
+        }
+
+        // عرض النتائج
+        function displayResults() {
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * resultsPerPage;
+            const endIndex = Math.min(startIndex + resultsPerPage, filteredStudents.length);
+            
+            document.getElementById('results-count').textContent = `(${filteredStudents.length} نتيجة)`;
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                const student = filteredStudents[i];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td>${student.seat_number}</td>
+                    <td>${student.name}</td>
+                    <td>${student.state}</td>
+                    <td>${student.school}</td>
+                    <td>${student.average.toFixed(2)}</td>
+                    <td class="${student.decision === 'ناجح' ? 'success' : 'failed'}">${student.decision}</td>
+                `;
+                row.addEventListener('click', () => showStudentDetails(student));
+                resultsBody.appendChild(row);
+            }
+        }
+
+        // إعداد أزرار التصفح
+        function setupPagination() {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+            
+            const totalPages = Math.ceil(filteredStudents.length / resultsPerPage);
+            
+            if (totalPages <= 1) return;
+            
+            // زر الصفحة السابقة
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'السابق';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayResults();
+                    setupPagination();
+                }
+            });
+            paginationDiv.appendChild(prevButton);
+            
+            // أزرار الصفحات
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.classList.toggle('active', i === currentPage);
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    displayResults();
+                    setupPagination();
+                });
+                paginationDiv.appendChild(pageButton);
+            }
+            
+            // زر الصفحة التالية
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'التالي';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayResults();
+                    setupPagination();
+                }
+            });
+            paginationDiv.appendChild(nextButton);
+        }
+
+        // ترتيب الجدول
+        function sortTable(columnIndex) {
+            // إذا تم النقر على نفس العمود، قم بعكس الترتيب
+            if (sortedColumn === columnIndex) {
+                sortDirection = -sortDirection;
+            } else {
+                sortedColumn = columnIndex;
+                sortDirection = 1;
+            }
+            
+            filteredStudents.sort((a, b) => {
+                let valueA, valueB;
+                
+                switch (columnIndex) {
+                    case 0: // الترتيب (لا حاجة للترتيب حسب الترتيب)
+                        return (a.index - b.index) * sortDirection;
+                    case 1: // رقم الجلوس
+                        valueA = a.seat_number;
+                        valueB = b.seat_number;
+                        break;
+                    case 2: // الاسم
+                        valueA = a.name;
+                        valueB = b.name;
+                        break;
+                    case 3: // الولاية
+                        valueA = a.state;
+                        valueB = b.state;
+                        break;
+                    case 4: // المدرسة
+                        valueA = a.school;
+                        valueB = b.school;
+                        break;
+                    case 5: // المعدل
+                        valueA = a.average;
+                        valueB = b.average;
+                        break;
+                    case 6: // القرار
+                        valueA = a.decision;
+                        valueB = b.decision;
+                        break;
+                    default:
+                        return 0;
+                }
+                
+                // الترتيب التصاعدي والتنازلي
+                if (valueA < valueB) return -1 * sortDirection;
+                if (valueA > valueB) return 1 * sortDirection;
+                return 0;
+            });
+            
+            displayResults();
+        }
+
+        // البحث عن طالب برقم الجلوس
+        function searchStudent() {
+            const searchInput = document.getElementById('search-input').value.trim();
+            if (searchInput === '') {
+                alert('الرجاء إدخال رقم الجلوس');
+                return;
+            }
+            
+            // البحث في جميع البيانات
+            const student = studentsData.find(s => s.seat_number === searchInput);
+            
+            if (student) {
+                showStudentDetails(student);
+            } else {
+                alert('لم يتم العثور على طالب بهذا رقم الجلوس');
+            }
+        }
+
+        // عرض تفاصيل الطالب
+        function showStudentDetails(student) {
+            document.getElementById('seat-number').textContent = student.seat_number;
+            document.getElementById('student-name').textContent = student.name;
+            document.getElementById('birth-place').textContent = student.birth_place;
+            document.getElementById('birth-date').textContent = student.birth_date;
+            document.getElementById('student-state').textContent = student.state;
+            document.getElementById('student-district').textContent = student.district;
+            document.getElementById('school-name').textContent = student.school;
+            document.getElementById('center-name').textContent = student.center;
+            document.getElementById('average').textContent = student.average.toFixed(2);
+            document.getElementById('decision').textContent = student.decision;
+            document.getElementById('specialization').textContent = student.specialization;
+            
+            // إضافة لون للقرار
+            const decisionElement = document.getElementById('decision');
+            decisionElement.className = student.decision === 'ناجح' ? 'success' : 'failed';
+            
+            document.getElementById('student-details').style.display = 'block';
+            document.getElementById('student-details').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // إغلاق تفاصيل الطالب
+        function closeDetails() {
+            document.getElementById('student-details').style.display = 'none';
+        }
+    </script>
+</body>
+  </html>
